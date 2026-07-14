@@ -272,6 +272,6 @@ Reusable External Tools
 
 ---
 
-## Author
+## Technologies Used
+python, uvicorn, fastmcp, pydantic, typing, mcp
 
-AI Engineering Portfolio Project
