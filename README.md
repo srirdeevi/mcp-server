@@ -1,4 +1,4 @@
-# 04-mcp-server — Custom MCP Tool Server
+# 04-enterprise-mcp-server — MCP Server with RAG Knowledge Tools
 
 ## Overview
 
@@ -23,26 +23,35 @@ AI Agent
 Direct Python Function Calls
 ```
 
-MCP approach:
+enterprise-mcp-server:
 
 ```
-AI Application
-      |
-      v
- MCP Protocol
-      |
-      v
- MCP Server
-      |
-      v
- Tools / Data Sources
+
+                MCP Client
+                    |
+                    |
+             Authentication
+                    |
+                    v
+             MCP Server
+                    |
+     +--------------+--------------+
+     |              |              |
+     v              v              v
+
+  RAG Tool      Database Tool   API Tool
+
+ search_docs    employee_db    system_health
 ```
 
 The MCP server acts as a bridge between AI systems and external capabilities.
 
 ---
 
-## Project Architecture
+## Architecture
+
+The MCP server exposes enterprise capabilities as AI tools.
+
 
 ```
                  AI Client
@@ -56,14 +65,20 @@ The MCP server acts as a bridge between AI systems and external capabilities.
                     |
                     v
 
-             MCP Server
+            Enterprise MCP Server
 
                     |
-          +---------+---------+
-          |                   |
-          v                   v
+                    v
 
-    Calculator Add       Calculator Multiply
+             RAG API Service
+                    |
+                    v
+
+              Vector Database
+                    |
+                    v
+
+            Enterprise Documents
 
 ```
 
@@ -71,45 +86,24 @@ The MCP server acts as a bridge between AI systems and external capabilities.
 
 ## Features
 
-### Calculator MCP Tools
+## Available MCP Tools
 
-The server exposes:
+### search_company_documents
 
-### Addition
+Searches enterprise documents using a RAG pipeline.
 
-Input:
-
-```json
-{
-  "a": 10,
-  "b": 5
-}
-```
-
-Output:
-
-```
-15
-```
-
----
-
-### Multiplication
+Example:
 
 Input:
 
-```json
 {
-  "a": 10,
-  "b": 5
+"question": "How many days can employees work remotely?"
 }
-```
+
 
 Output:
 
-```
-50
-```
+"Employees can work remotely up to three days per week."
 
 ---
 
